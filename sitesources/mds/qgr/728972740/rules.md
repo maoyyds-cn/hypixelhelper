@@ -114,8 +114,8 @@
 
 不要单纯发送崩溃页面, 发视频都可以 (崩溃前你做了什么), 如果视频看不出问题必须带崩溃报告，否则小沙雕无法处理你的请求 (某些没有崩溃报告的那就使用IQ Booster吧)
 
-![p](https://xiaoshadiao.club/qgr?g=728972740&file=mp2.jpg)
-![p](https://xiaoshadiao.club/qgr?g=728972740&file=mp1.jpg)
+![p](/qgr?g=728972740&file=mp2.jpg)
+![p](/qgr?g=728972740&file=mp1.jpg)
 
 > 警告：如果崩溃报告是has_err_pid形式的, 请不要把文件直接丢群里, 私发给小沙雕. 务必注意你的崩溃日志中是否包含has_err_pid的文件日志, 若直接发到群内造成的任何后果自负!
 
@@ -142,6 +142,6 @@
 <br>
 <div style="text-align:center;">
 <div style="position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;">
-<iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1dyXqBaEE5&page=1&high_quality=1&danmaku=1&autoplay=0&t=0" allowfullscreen="allowfullscreen" style="position:absolute;top:0;left:0;width:100%;height:100%;" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>
+<iframe src="/qgr_random_video" allowfullscreen="allowfullscreen" style="position:absolute;top:0;left:0;width:100%;height:100%;" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>
 </div>
 </div>

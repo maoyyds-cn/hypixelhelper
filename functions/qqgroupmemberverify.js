@@ -36,8 +36,6 @@ export async function onRequest(context) {
         return new Response(JSON.stringify(json), init)
     } else if (action == "handle") {
 
-        const data = await context.env.gv.get(code)
-
         let obj = { success: false, msg: "未知错误" }
 
         if (context.request.method !== "POST") {
@@ -60,6 +58,8 @@ export async function onRequest(context) {
             const response = Response.json(obj, { status: 400 })
             return response
         }
+
+        const data = await context.env.gv.get(code)
 
         if (!data) {
             obj.msg = "验证代码" + code + "不存在"
@@ -110,6 +110,19 @@ export async function onRequest(context) {
 
         return Response.json(obj)
     } else if (!action) {
+        const data = await context.env.gv.get(code)
+        if(data) {
+            const json = JSON.parse(data)
+            const rules = await context.env.ASSETS.fetch(new URL("https://xiaoshadiao.club/sitesources/mds/qgr/" + json.groupnumber + "/rules.md"));
+            if(rules.status == 200) {
+                const redirect = new URL("/qgr", context.request.url);
+                redirect.searchParams.append("g", json.groupnumber)
+                redirect.searchParams.append("qgvc", code)
+                if(hook) redirect.searchParams.append("hook", hook)
+                return Response.redirect(redirect)
+            }
+        }
+        
         return context.next();
     }
 

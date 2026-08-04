@@ -3,33 +3,173 @@
 
 <head>
     <!-- 1. 引入 marked.js 用于解析 Markdown -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="/datagetter?url=https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <!-- 2. 引入 DOMPurify 用于过滤危险的 HTML 标签（保障安全） -->
-    <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+    <script src="/datagetter?url=https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
     <!-- 3. 引入 highlight.js 的默认配色主题 (这里用了 github 风格) -->
     <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github.min.css">
+        href="/datagetter?url=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github.min.css">
     <!-- 4. 引入 highlight.js 的核心库 -->
-    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="小沙雕正在维护的项目, 例如Minecraft Mod Hypixel Helper, XiaoShadiao Obfuscator(小沙雕混淆器)等. 小沙雕的个人网站, 拥有一些小项目, 正在制作的项目有: Minecraft Hypixel Helper Mod, Java XiaoShadiao Obfuscator等. 欢迎大家来与小沙雕互动! qwq">
-    <meta name="keywords" content="小沙雕,个人网站,awa,Java,Minecraft,Hypixel,Helper,Obfuscator,项目,开发,xiaoshadiao">
+    <script
+        src="/datagetter?url=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+    <!-- 5. 引入 Toastify-js 通知库 -->
+    <link rel="stylesheet"
+        href="/datagetter?url=https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="/datagetter?url=https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="/sitesources/js/toasthelper.js"></script>
 
     <title>群聊规则</title>
 
-    <!-- ICONS -->
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="64x64" href="icons/favicon-64x64.png">
-    <link rel="icon" type="image/png" sizes="64x64" href="xsdv2.png">
+    <!-- metareplacement -->
 
     <link rel="stylesheet" href="/sitesources/css/qgr.css">
 
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js"></script>
+    
     <script src="/sitesources/js/header.js" defer></script>
     <script src="/sitesources/js/markdownhelper.js"></script>
+    <script src="/sitesources/js/qgr.js"></script>
+
+    <style>
+        #qqgroupmemberverify-content {
+            max-width: 600px;
+            margin: 0 auto;
+            width: calc(100vw - 40px);
+        }
+
+        #result {
+            text-align: center;
+        }
+
+        #result h3 {
+            margin: 20px auto;
+            max-width: 90%;
+            word-wrap: break-word;
+            word-break: break-all;
+            overflow-wrap: break-word;
+        }
+
+        .verify-btn {
+            margin-bottom: 15px;
+            display: block;
+            margin: 0 auto;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #FFE34F 0%, #FFB300 100%);
+            color: #3a2a00;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            transition: box-shadow 0.3s, transform 0.2s, filter 0.3s;
+            box-sizing: border-box;
+            box-shadow: 0 4px 18px rgba(255, 179, 0, 0.45), 0 1px 3px rgba(255, 179, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+        }
+
+        .verify-btn:hover {
+            filter: brightness(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 179, 0, 0.55), 0 2px 6px rgba(255, 179, 0, 0.35);
+        }
+
+        .verify-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.55);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .verify-btn.click-anim {
+            animation: clickFade 0.25s ease-out forwards;
+        }
+
+        .verify-btn.click-anim::after {
+            animation: ripple 0.25s ease-out forwards;
+        }
+
+        #turnstile-widget {
+            margin: 0 auto;
+            display: block;
+            text-align: center;
+            max-width: 400px;
+        }
+
+        @keyframes clickFade {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+
+            30% {
+                transform: translateY(2px) scale(0.95);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-6px) scale(0.92);
+                opacity: 0;
+            }
+        }
+
+        @keyframes ripple {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+
+            100% {
+                width: 320px;
+                height: 320px;
+                opacity: 0;
+            }
+        }
+
+        .Toastify__toast {
+            border-radius: 12px;
+            font-family: inherit;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .Toastify__toast--animated {
+            animation: toastSlideIn 0.35s cubic-bezier(0.21, 1.02, 0.73, 1) both;
+        }
+
+        .Toastify__toast-icon {
+            margin-inline-end: 10px;
+        }
+
+        .Toastify__close-button {
+            color: #fff;
+            opacity: 0.8;
+        }
+
+        .Toastify__close-button:hover {
+            opacity: 1;
+        }
+
+        @keyframes toastSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(400px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -37,6 +177,14 @@
     <div id="header-placeholder"></div>
 
     <div id="markdown-content" class="header-offset"></div>
+
+    <div id="qqgroupmemberverify-content">
+        <button style="display: none;" id="verifyButton" class="verify-btn">点击完成验证</button>
+        <div id="turnstile-widget"></div>
+        <div id="result">
+            <h3></h3>
+        </div>
+    </div>
 
     <script>
         console.log(hljs.getLanguage('javascript'));
@@ -50,10 +198,10 @@
         let qqgroup = url.searchParams.get("g");
 
         // 4. 准备你的 Markdown 文本（实际开发中可能是从后台接口获取的）
-        fetch(url.host.includes("localhost") ? "/sitesources/mds/qgr/728972740/rules.md" : "/qgr?g=" + qqgroup + "&file=rules.md")
+        fetch("/qgr?g=" + qqgroup + "&file=rules.md")
             .then(response => response.text())
             .then(markdownText => xsdMarkdown.attachToElement('markdown-content', markdownText));
-        
+
         // 5. 核心步骤：解析 Markdown 并进行安全净化，最后渲染到页面
         // const rawHtml = marked.parse(markdownText); // 将 Markdown 转换为 HTML 字符串
         // const cleanHtml = DOMPurify.sanitize(rawHtml); // 过滤掉潜在的 XSS 攻击代码
@@ -64,6 +212,13 @@
         // });
 
     </script>
+
+    <script>
+
+        
+
+    </script>
+
 </body>
 
 </html>
